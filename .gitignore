@@ -1,0 +1,17 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+.vs
+*.suo
+*.user
+*.dbmdl
+*.jfm
+*.refactorlog
+_ReSharper.*
+site.min.css
+site.min.js
+bin
+obj
+packages
+/src/webapi/Logs

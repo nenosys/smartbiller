@@ -1,0 +1,67 @@
+﻿@model List<Domains.Billing.Models.BillingCategory>
+<div class="jumbotron">
+    <div class="container">
+        <h3>Categories</h3>
+    </div>
+</div>
+
+<div class="container">
+    <div class="=row margin-bottom-10" id="categories-actions">
+        <button type="button" id="add-new-category" class="btn btn-primary pull-right">Add new Category</button>
+    </div>
+    <div class="row">
+        <table id="categories-list" class="table table-striped table-bordered table-condensed table-responsive">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Rate type</th>
+                    <th>Rate</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+            {
+                    <tr>
+                        <td>@category.Name</td>
+                        <td>@category.BillingDepartment.Name</td>
+                        <td>@category.BillingRateType1.Name</td>
+                        <td>@category.ChargePerUnit</td>
+                        <td><button type="button" class="btn btn-primary category-action" data-action="edit" data-id="@category.Id">Edit</button></td>
+                        <td><button type="button" class="btn btn-danger category-action" data-action="delete" data-id="@category.Id">Delete</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $("#add-new-category").click(function() {
+            common.openDialog("/Patients/editcategory", "Add new category", function () {
+                billing.saveCategory();
+            });
+        });
+        $(".category-action").click(function () {
+            var id = $(this).attr("data-id");
+            var action = $(this).attr("data-action");
+            if (action === "edit") {
+                common.openDialog("/Patients/editcategory?id=" + id, "Edit category", function() {
+                    billing.saveCategory(id);
+                });
+            }
+            else if (action === "delete") {
+                common.confirm("Delete category", "Are you sure you want to delete the selectd category?", function () {
+                    billing.deleteCategory(id);
+                    common.closeDialog();
+                });
+            }
+            else if (action === "view") {
+                window.location = "/patients/visits?patientId=" + id;
+            }
+        });
+        $('#categories-list').DataTable();
+    });
+</script>

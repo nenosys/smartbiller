@@ -1,0 +1,3 @@
+
+Server=tcp:smartbiller.database.windows.net,1433;Database=smartbillerdb;User ID=anoop.k.mathew@live.com@smartbiller;Password={your_password_here};Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+Kl5t_r!sfk

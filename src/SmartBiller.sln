@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{006B53D9-9833-40EF-BBC4-74DF0F6C35C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{FD52387C-9EDF-41C9-953E-21D2B34BE540}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Databases", "Databases", "{D9CF4356-7CBD-4C51-9E0F-6113A55D2751}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBiller.UI", "UI\SmartBiller.UI\SmartBiller.UI.csproj", "{F8B41D43-146C-49B3-ACE8-B02267E459E4}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SmartBillerDB", "Databases\SmartBillerDB\SmartBillerDB.sqlproj", "{97B2A0FE-41D9-4F3F-993C-5EA93BB2955C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing", "Domains\Billing\Billing.csproj", "{9AEE1DA7-F14C-4CA0-9E26-F9A1CCD87A03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8B41D43-146C-49B3-ACE8-B02267E459E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8B41D43-146C-49B3-ACE8-B02267E459E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8B41D43-146C-49B3-ACE8-B02267E459E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8B41D43-146C-49B3-ACE8-B02267E459E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97B2A0FE-41D9-4F3F-993C-5EA93BB2955C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97B2A0FE-41D9-4F3F-993C-5EA93BB2955C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97B2A0FE-41D9-4F3F-993C-5EA93BB2955C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{97B2A0FE-41D9-4F3F-993C-5EA93BB2955C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97B2A0FE-41D9-4F3F-993C-5EA93BB2955C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97B2A0FE-41D9-4F3F-993C-5EA93BB2955C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9AEE1DA7-F14C-4CA0-9E26-F9A1CCD87A03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AEE1DA7-F14C-4CA0-9E26-F9A1CCD87A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AEE1DA7-F14C-4CA0-9E26-F9A1CCD87A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AEE1DA7-F14C-4CA0-9E26-F9A1CCD87A03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F8B41D43-146C-49B3-ACE8-B02267E459E4} = {006B53D9-9833-40EF-BBC4-74DF0F6C35C6}
+		{97B2A0FE-41D9-4F3F-993C-5EA93BB2955C} = {D9CF4356-7CBD-4C51-9E0F-6113A55D2751}
+		{9AEE1DA7-F14C-4CA0-9E26-F9A1CCD87A03} = {FD52387C-9EDF-41C9-953E-21D2B34BE540}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://thecodefreaks.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = UI\\SmartBiller.UI\\SmartBiller.UI.csproj
+		SccProjectTopLevelParentUniqueName1 = SmartBiller.sln
+		SccProjectName1 = UI/SmartBiller.UI
+		SccLocalPath1 = UI\\SmartBiller.UI
+		SccProjectUniqueName2 = Databases\\SmartBillerDB\\SmartBillerDB.sqlproj
+		SccProjectTopLevelParentUniqueName2 = SmartBiller.sln
+		SccProjectName2 = Databases/SmartBillerDB
+		SccLocalPath2 = Databases\\SmartBillerDB
+		SccProjectUniqueName3 = Domains\\Billing\\Billing.csproj
+		SccProjectTopLevelParentUniqueName3 = SmartBiller.sln
+		SccProjectName3 = Domains/Billing
+		SccLocalPath3 = Domains\\Billing
+	EndGlobalSection
+EndGlobal

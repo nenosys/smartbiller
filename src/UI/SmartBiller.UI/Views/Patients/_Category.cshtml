@@ -1,0 +1,39 @@
+﻿@model SmartBiller.UI.Models.CategoryViewModel
+<div class="container">
+    <div class="row margin-bottom-10">
+        <div class="col-lg-3">Name</div>
+        <div class="col-lg-9">
+            <input type="text" id="category-name"  value="@Model.Category.Name" />
+        </div>
+    </div>
+    <div class="row  margin-bottom-10">
+        <div class="col-lg-3">Department</div>
+        <div class="col-lg-9">
+            @Html.DropDownList("category-department", Model.Departments)
+        </div>
+    </div>
+    <div class="row  margin-bottom-10">
+        <div class="col-lg-3">Rate type</div>
+        <div class="col-lg-9">
+            @Html.DropDownList("category-rate-types", Model.RateTypes)
+        </div>
+    </div>
+    <div class="row margin-bottom-10">
+        <div class="col-lg-3">Charge per unit</div>
+        <div class="col-lg-9">
+            <input type="text" id="category-rate-per-unit" value="@Model.Category.ChargePerUnit"/>
+        </div>
+    </div>
+    <div class="row margin-bottom-10">
+        <div class="col-lg-3">Upper bound for charge</div>
+        <div class="col-lg-9">
+            <input type="text" id="category-threshold" value="@Model.Category.ChargeUpperBound" />
+        </div>
+    </div>
+    <div class="row margin-bottom-10">
+        <div class="col-lg-3">Charge after upper bound</div>
+        <div class="col-lg-9">
+            <input type="text" id="category-rate-per-unit-after-threshold" value="@Model.Category.ChargeAfterUpperBound" />
+        </div>
+    </div>
+</div>

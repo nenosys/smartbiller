@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBiller</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/typeahead")
+    @Scripts.Render("~/bundles/datatable")
+    @Scripts.Render("~/bundles/app")
+
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Smartbiller", "Patients", "Patients", new {area = ""}, new {@class = "navbar-brand"})
+            <input type="search" id="search-global" class="nav navbar-nav" placeholder="search using patient id"/>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Patients", "Patients", "Patients")</li>
+                <li>@Html.ActionLink("Billig Categories", "BillingCategories", "Patients")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>
+<div class="container body-content">
+    @RenderBody()
+    @Html.Partial("_Dialog")
+
+    <footer class="navbar-fixed-bottom">
+        <hr/>
+        <p>&copy; @DateTime.Now.Year - SmartBiller</p>
+    </footer>
+</div>
+
+@*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
+@RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () {
+           $("#search-global").typeahead({
+            source:
+                function (query, process) {
+                    $.get("/patients/searchpatients?q=" + query, function (data) {
+                        process(data);
+                    });
+                },
+            autoSelect: false,
+            afterSelect: function (selectedItem) {
+                window.location = "/patients/visits?patientId=" + selectedItem.id;
+            }
+        });
+    });
+    </script>
+</body>
+
+
+</html>
+

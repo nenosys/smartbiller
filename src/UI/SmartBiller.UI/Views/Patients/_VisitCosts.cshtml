@@ -1,0 +1,61 @@
+﻿@model Domains.Billing.Models.PatientVisit
+<div class="container">
+    <h3>Visit costs</h3>
+    <h3 class="pull-right">Total Cost: <label id="total-payable"> @Model.PatientVisitCosts.Sum(x => x.TotalCost)</label> Rs</h3>
+    @if (Model != null)
+    {
+      
+        <div class="row  margin-bottom-10">
+            <table id="patient-visit-costs" class="table table-striped table-bordered table-condensed table-responsive">
+                <thead>
+                <tr>
+                    <th>Charged service</th>
+                    <th>Quantity</th>
+                    <th>Charge per unit</th>
+                    <th>Total units</th>
+                    <th>Total cost</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var cost in Model.PatientVisitCosts.OrderBy(x => x.Id))
+                {
+                    <tr data-id="@cost.Id" data-categoryid ="@cost.BillingCategoryId">
+
+                        <td class="category"><input class="row-edit"  type="text" value="@cost.BillingCategory.Name" /></td>
+                        <td class="quantity"><input  data-categoryid ="@cost.BillingCategoryId" class="row-edit cost-quantity" type="text" value="@cost.Quantity" /></td>
+                        <td class="rate">@cost.BillingCategory.ChargePerUnit</td>
+                        <td class="units"><input class="row-edit chargable-units"    type="text" value="@cost.ChargableUnits" /></td>
+                        <td class="cost">@cost.TotalCost</td>
+                        <td><button type="button" class="btn btn-danger delete-cost" data-action="delete" >Delete</button></td>
+                    </tr>
+                }
+
+                <tr data-id="0" data-categoryid ="0">
+                    <td class="category"><input class="row-edit"  type="text" value="" /></td>
+                    <td class="quantity"><input class="row-edit cost-quantity" type="text" value="1"/></td>
+                    <td class="rate"></td>
+                    <td class="units"><input class="row-edit chargable-units"  type="text" value="1" /></td>
+                    <td class="cost"></td>
+                    <td><button type="button" class="btn btn-danger delete-cost" data-action="delete">Delete</button></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <label>There are no visits and costs</label>
+    }
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        billing.selectedVisitId = @Model.Id ;
+        billing.bindVisitCostsEvents();
+        $("#patient-visit-costs").scrollTop($("#patient-visit-costs")[0].scrollHeight);
+        
+    });
+</script>

@@ -1,0 +1,21 @@
+﻿@model Domains.Billing.Models.PatientVisit
+<div class="container">
+    <div class="row margin-bottom-10">
+        <div class="col-lg-3">In date</div>
+        <div class="col-lg-9">
+            <input type="text" id="visit-in-date" placeholder="yyyy-mm-dd" value="@Model.StartDate.ToString("yyyy-MM-dd")" />
+        </div>
+    </div>
+    <div class="row  margin-bottom-10">
+        <div class="col-lg-3">Out date</div>
+        <div class="col-lg-9">
+            <input type="text" id="visit-out-date" placeholder="yyyy-mm-dd" value="@(Model.EndDate?.ToString("yyyy-MM-dd") ??string.Empty)" />
+        </div>
+    </div>
+    <div class="row  margin-bottom-10">
+        <div class="col-lg-3">Discharged</div>
+        <div class="col-lg-9">
+            <input type="checkbox" id="visit-discharged" @(Model.Settled ? "checked='checked'" : string.Empty) />
+        </div>
+    </div>
+</div>

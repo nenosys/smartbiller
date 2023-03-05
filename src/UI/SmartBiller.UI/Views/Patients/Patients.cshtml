@@ -1,0 +1,73 @@
+﻿@model List<Domains.Billing.Models.Patient>
+<style>
+ #categories-actions {
+        margin-bottom: 45px;
+    }
+</style>
+
+
+<div class="jumbotron">
+    <div class="container">
+        <h3>Patients</h3>
+    </div>
+</div>
+<div class="container">
+    <div class="=row" id="categories-actions">
+        <button type="button" id="add-new-patient" class="btn btn-primary pull-right">Add new patient</button>
+    </div>
+    <div class="row">
+        <table  class="table table-striped table-bordered table-condensed table-responsive">
+            <thead>
+            <tr>
+                <th>Identifier</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Added on</th>
+                <th>Edit</th>
+                <th>View Details</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var patient in Model)
+            {
+                <tr>
+                    <td>@patient.Identifier</td>
+                    <td>@patient.FullName</td>
+                    <td>@patient.Age</td>
+                    <td>@patient.AddedDate</td>
+                    <td><button type="button" class="btn btn-primary patients-action" data-action="edit" data-id="@patient.Id">Edit</button></td>
+                    <td><button type="button" class="btn btn-primary patients-action" data-action="view" data-id="@patient.Id">Details</button></td>
+                    <td><button type="button" class="btn btn-danger patients-action"  data-action="delete" data-id="@patient.Id">Delete</button></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#add-new-patient").click(function() {
+            common.openDialog("/Patients/PatientDetails", "Add new patient", function () { billing.savePatient()});
+        });
+        $(".patients-action").click(function () {
+            var id = $(this).attr("data-id");
+            billing.selectedPatientId = id;
+            var action = $(this).attr("data-action");
+            if (action === "edit") {
+                common.openDialog("/Patients/PatientDetails?id=" + id, "Edit patient", function () { billing.savePatient(id) });
+            }
+            else if (action === "delete") {
+                common.confirm("Delete patient", "Are you sure you want to delete the patient and all the related data?",function (){
+                    billing.deletePatient();
+                    common.closeDialog();
+                });
+            }
+            else if (action === "view") {
+                window.location = "/patients/visits?patientId=" + id;
+            }
+        });
+    });
+</script>
+

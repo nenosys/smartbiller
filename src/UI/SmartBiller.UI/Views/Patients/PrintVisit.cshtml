@@ -1,0 +1,76 @@
+﻿@model SmartBiller.UI.Models.PatientVisitModel
+<div class="container">
+    <h3>@Model.Visit.Patient.FullName</h3>
+    <div class="row margin-bottom-10" id="visit-categories">
+        <div class="col-sm-4">
+            <label>Choose category</label>
+        </div>
+        <div class="col-sm-4">@Html.DropDownList("patientvisit-categories",@Model.Categories)</div>
+     </div>
+        <div class="row margin-bottom-10">
+            <div class="col-sm-4">
+                <label>In date : @Model.Visit.StartDate.ToString("yyyy-MM-dd")</label>
+            </div>
+            <div class="col-sm-4"><label>Out date : @(Model.Visit.EndDate?.ToString("yyyy-MM-dd") ?? string.Empty)</label></div>
+
+            <div class="col-sm-2"><label>Discharged : @(Model.Visit.Settled ? "Yes" : "No")</label></div>
+            <div class="col-sm-2">
+                <img class="pull-right" src="~/Content/Images/header.png" />
+            </div>
+        </div>
+        <div class="row margin-bottom-10">
+            <button class="btn btn-primary pull-right" id="print-bill">Print</button>
+        </div>
+        <div class="row  margin-bottom-10">
+            <table class="table table-striped table-bordered table-condensed table-responsive">
+                <thead>
+                    <tr>
+                        <th>Particulars</th>
+                        <th>Quantity</th>
+                        <th>Charge per unit</th>
+                        <th>Total units</th>
+                        <th>Total cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cost in Model.Visit.PatientVisitCosts.OrderBy(x => x.Id))
+                    {
+                        <tr>
+
+                            <td>@cost.BillingCategory.Name</td>
+                            <td>@cost.Quantity</td>
+                            <td>@cost.BillingCategory.ChargePerUnit</td>
+                            <td>@cost.ChargableUnits</td>
+                            <td>@cost.TotalCost</td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <td>Total</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>@Model.Visit.PatientVisitCosts.Sum(x => x.TotalCost)</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <h3>Total payable: @Model.Visit.PatientVisitCosts.Sum(x => x.TotalCost) Rs</h3>
+        </div>
+    </div>
+
+<script>
+    $(document).ready(function () {
+        billing.selectedVisitId = @Model.Visit.Id ;
+        $("#print-bill").click(function() {
+            window.print();
+        });
+
+        $("#patientvisit-categories").change(function(){
+            var id = $(this).val();
+            window.location = "/patients/printvisit?visitId=@Model.Visit.Id" + "&categoryId=" + id;
+        });
+    });
+</script>

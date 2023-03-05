@@ -1,0 +1,132 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 400px;
+    width: 100%;
+}
+
+#loginForm input,#loginForm select,#loginForm textarea {
+    max-width: 280px;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.modal-error-message {
+    display: none;
+    color: #CC1D1D;
+    margin-left: 10px;
+    font-style: italic;
+}
+
+ .row-edit {
+        border: none;
+        background-color: transparent;
+    }
+
+ #loginForm {
+     margin-top: 50%;
+     margin-left: 40%;
+ }
+
+ .navbar-inverse {
+     background-color: #1E5280;
+ }
+
+ footer  p {
+     margin-left: 10px;
+ }
+
+ a.navbar-brand {
+    background-image: url("/content/images/appicon.png");
+    background-position-x: 13px;
+    background-position-y: 8px;
+    background-size: 27px;
+    background-repeat: no-repeat;
+    padding-left: 42px;
+     color: white !important;
+ }
+
+ .navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
+
+ .category {
+    width: 40% !important;
+}
+
+ .quantity {
+     width: 5%;
+ }
+
+ #search-global {
+     margin-top: 10px;
+    width: 300px;
+    border-radius: 5px;
+ }
+
+ #categories-actions {
+     margin-bottom: 40px;
+ }
+ .modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+tr.active td {
+    background-color: #9d9d9d !important;
+}
+
+#patient-visit-costs {
+    display: block;
+    overflow: auto;
+    height: 500px;
+}
+
+@media print {
+    footer {
+        display: none;
+    }
+
+    #print-bill {
+        display: none;
+    }
+
+    #visit-categories{
+        display:none !important;
+    }
+}

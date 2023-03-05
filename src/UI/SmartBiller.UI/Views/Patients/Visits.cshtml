@@ -1,0 +1,100 @@
+﻿@using Domains.Billing.Models
+@model Domains.Billing.Models.Patient
+<div class="jumbotron">
+    <div class="container">
+        <h3>Visits by @Model.FullName (@Model.Identifier)</h3>
+    </div>
+</div>
+<div class="container">
+    <div class="row margin-bottom-10">
+        <button type="button" id="add-new-visit" class="btn btn-primary pull-right">Add visit</button>
+    </div>
+    <div class="row">
+        
+        @if (!Model.PatientVisits.Any())
+        {
+            <label>No visits registered yet!</label>
+        }
+        else
+        {
+             var index = Model.PatientVisits.Count - 1;
+            <table id="patient-visits" class="table table-striped table-bordered table-condensed table-responsive">
+                <thead>
+                <tr>
+                    <th>In date</th>
+                    <th>Out date</th>
+                    <th>Discharged</th>
+                    <th>Total Bill</th>
+                    <th>Edit</th>
+                    <th>Print</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var visit in Model.PatientVisits)
+                {
+                    <tr data-id="@visit.Id" @(index == 0?"class=active":string.Empty )>
+                        <td>@visit.StartDate.ToString("yyyy-MM-dd")</td>
+                        <td>@(visit.EndDate?.ToString("yyyy-MM-dd") ?? string.Empty)</td>
+                        <td>Yes</td>
+                        <td>@visit.TotalCost Rs</td>
+                        <td><button type="button" class="btn btn-primary visit-action" data-action="edit" data-id="@visit.Id">Edit</button></td>
+                        <td><button type="button" class="btn btn-primary visit-action" data-action="print" data-id="@visit.Id">Print preview</button></td>
+                        <td><button type="button" class="btn btn-danger visit-action" data-action="delete" data-id="@visit.Id">Delete</button></td>
+                    </tr>
+                    index--;
+                }
+
+                </tbody>
+            </table>
+        }
+
+    </div>
+    <div class="row" id="visit-costs">
+        @if (Model.PatientVisits.Any())
+        {
+            @Html.Partial("_VisitCosts", Model.PatientVisits.LastOrDefault())
+        }
+        
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        billing.selectedPatientId = @Model.Id;
+        $("#add-new-visit").click(function () {
+            common.openDialog("/Patients/editvisit", "Add new visit", function() {
+                billing.saveVisit();
+            });
+        });
+
+        $('#patient-visits').on('click', 'tbody tr', function(event) {
+            $(this).addClass('active').siblings().removeClass('active');
+            var visitId = $(this).attr("data-id");
+            $("#visit-costs").load("/patients/visitcosts?visitId=" + visitId);
+        });
+
+        $(".visit-action").click(function () {
+            var id = $(this).attr("data-id");
+            var action = $(this).attr("data-action");
+            if (action === "edit") {
+                common.openDialog("/Patients/editvisit?id=" + id + "&patientId=" + billing.selectedPatientId, "Edit visit", function() {
+                    billing.saveVisit(id);
+                });
+            }
+            else if (action === "delete") {
+                common.confirm("Delete vist", "Are you sure you want to delete the visit details and all the related cost?",function (){
+                    billing.deleteVisit(id);
+                    common.closeDialog();
+                });
+            }
+            else if (action === "view") {
+                window.location = "/patients/visits?patientId=" + id;
+            }
+            else if (action === "print") {
+                window.location = "/patients/printvisit?visitId=" + id;
+            }
+        });
+    });
+</script>
